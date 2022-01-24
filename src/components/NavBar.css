@@ -1,0 +1,18 @@
+.navigation {
+    display: flex;
+    background-color: gray;
+    color: white;
+    align-items: center;
+    min-height: 50px;
+    color: red;
+  }
+  
+  ul {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+  
+  ul li {
+    list-style-type: none;
+  }
