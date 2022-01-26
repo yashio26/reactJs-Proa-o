@@ -1,3 +1,8 @@
 .App {
   text-align: center;
 }
+
+.Articulos {
+	display: flex;
+	justify-content: space-evenly;
+}
