@@ -1,0 +1,10 @@
+button{
+    width: 119px;
+    background-color: whitesmoke;
+}
+.AgregarCarrito{
+    margin: 10px;
+    background-color: green;
+    width: 250px;
+    height: 50px;
+}
