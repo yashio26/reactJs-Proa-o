@@ -1,7 +1,6 @@
 .Articulo{
     width: 350px;
-    border: solid black 1px;
-    background-color: silver;
+    border: solid silver 5px;
     margin: 10px;
 }
 .Articulos {

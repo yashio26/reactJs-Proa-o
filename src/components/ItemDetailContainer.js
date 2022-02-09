@@ -2,29 +2,34 @@ import React from 'react';
 import ItemDetail from './ItemDetail';
 import "./ItemDetailContainer.css";
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import Spinner from './Spinner/Spinner';
 
 const ItemDetailContainer = () => {
     const [details, setDetails] = React.useState({});
+    const [isLoading, setIsLoading] = React.useState(true);
 
-    console.log(details);
+    let id=useParams().id;
+    console.log(id);
 
     React.useEffect(() => {
+        axios(`https://fakestoreapi.com/products/${id}`).then((res) => setDetails(res.data));
         setTimeout(() => {
-            axios("https://fakestoreapi.com/products/1").then((res) => setDetails(res.data));
-        }, 2000)
-    }, []);
+            setIsLoading(false);
+        }, 1000);
+    }, [id]);
 
     return(
-        <div className='DetalleArticulos'>
-            <div className='CardArticulo'>
-                <ItemDetail detail={details}/>
+        <>
+        {isLoading ? (
+            <div className='Spinner'>
+                <Spinner />
             </div>
-            <div className='DescripcionArticulo'>
-                <h2>{details.title}</h2>
-                <h5>{details.description}</h5>
-                <h3>Price: ${details.price}</h3>
-            </div>
-        </div>
+            ) : (
+            <ItemDetail detail={details}/>
+            )
+        }
+        </>
     );
 };
 

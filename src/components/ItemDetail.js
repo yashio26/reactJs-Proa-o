@@ -1,15 +1,17 @@
 import React from 'react';
-import { Card, CardBody, CardTitle, CardText } from 'reactstrap';
+import ItemCount from './ItemCount';
 
 const ItemDetail = ({detail}) => {
   return(
-    <Card>
-        <CardBody>
-            <CardTitle tag='h5'>{detail.title}</CardTitle>
-            <img src={detail.image} alt='user-img' width={200} />
-            <CardText>{detail.category}</CardText>
-        </CardBody>
-    </Card>
+    <>
+      <div className='DescripcionArticulo'>
+        <h2>{detail.title}</h2>
+        <img src={detail.image} alt='product'></img>
+        <h5>Description: {detail.description}</h5>
+        <h3>Price: ${detail.price}</h3>
+        <ItemCount stock="5"/>
+      </div>
+  </>
   );
 };
 
