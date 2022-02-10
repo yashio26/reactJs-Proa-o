@@ -9,8 +9,8 @@ const NavBar = () => {
 				<Link to='/' className='Link'>
 					Home
 				</Link>
-				<Link to='/about' className='Link'>
-					About
+				<Link to='/category' className='Link'>
+					Electronics
 				</Link>
                 <li><CardWidget /></li>
 			</ul>

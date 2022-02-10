@@ -3,7 +3,11 @@ import ItemListContainer from '../../components/ItemListContainer';
 
 const Home = () => {
   return(
+    <>
+      <h1>Lo destacado de la semana</h1>
       <ItemListContainer />
+    </>
+      
     );
 };
 

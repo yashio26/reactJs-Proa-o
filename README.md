@@ -1,3 +1,5 @@
+Mi idea es hacer una tienda sobre cosmeticos de un juego. Se utiliza Fake Store por el momento como API. Usé Material para los cards por ejemplo, antes estaba usando reacstrap. Creé el archivo . env también.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
