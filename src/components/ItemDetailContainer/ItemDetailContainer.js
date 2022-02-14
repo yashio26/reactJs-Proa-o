@@ -1,9 +1,9 @@
 import React, { useState, useEffect} from 'react';
-import ItemDetail from './ItemDetail';
-import "./ItemDetailContainer.css";
+import ItemDetail from '../ItemDetail/ItemDetail';
+import './ItemDetailContainer.css';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import Spinner from './Spinner/Spinner';
+import Spinner from '../Spinner/Spinner';
 
 const ItemDetailContainer = () => {
     const [details, setDetails] = useState({});

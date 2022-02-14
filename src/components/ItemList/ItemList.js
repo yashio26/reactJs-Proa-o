@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Item from "./Item";
-import "./ItemList.css";
+import Item from '../Item/Item';
+import './ItemList.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Spinner from './Spinner/Spinner';
+import Spinner from '../Spinner/Spinner';
 
 const ItemList = () => {    
     const [products, setProducts] = useState([]);
