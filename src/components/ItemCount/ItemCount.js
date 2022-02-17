@@ -3,7 +3,7 @@ import './ItemCount.css';
 import { Link } from 'react-router-dom';
 
 
-const ItemCount = ({stock}) => {
+const ItemCount = ({stock, data, agregarAlCarrito}) => {
 
     const [initial, setInitial] = useState(1);
 
@@ -13,9 +13,9 @@ const ItemCount = ({stock}) => {
     function onRemove(){
         setInitial(initial - 1);
     }
-    function addToCart(){
+/*     function addToCart(){
         console.log("Se agregaron " + initial + " productos");
-    }
+    } */
 
     if (stock === "0"){
         return (
@@ -30,9 +30,8 @@ const ItemCount = ({stock}) => {
                 <p>Queda solo {stock} unidad disponible</p>
                 <p>Comprar: {initial} unidad</p>
                 <Link to='/cart'>
-                    <button className='AgregarCarrito' onClick={addToCart}>Comprar {initial} unidades</button>
+                    <button className='AgregarCarrito' onClick={() => agregarAlCarrito(data.id)}>Comprar {initial} unidades</button>
                 </Link>
-                localStorage.setItem("Cantidad", {initial});
             </React.Fragment>
         );
     }
@@ -45,9 +44,8 @@ const ItemCount = ({stock}) => {
                     <button onClick={onRemove}>-</button>
                     <button onClick={onAdd}>+</button>
                     <Link to='/cart'>
-                    <button className='AgregarCarrito' onClick={addToCart}>Comprar {initial} unidades</button>
+                    <button className='AgregarCarrito' onClick={() => agregarAlCarrito(data.id)}>Comprar {initial} unidades</button>
                     </Link>
-                    localStorage.setItem("cantidad", {initial});
                 </React.Fragment>
             );
         }
@@ -59,9 +57,8 @@ const ItemCount = ({stock}) => {
                     <button>-</button>
                     <button onClick={onAdd}>+</button>
                     <Link to='/cart'>
-                        <button className='AgregarCarrito' onClick={addToCart}>Comprar {initial} unidades</button>
+                        <button className='AgregarCarrito' onClick={() => agregarAlCarrito(data.id)}>Comprar {initial} unidades</button>
                     </Link>
-                    localStorage.setItem("cantidad", {initial});
                 </React.Fragment>
             );
         }
@@ -73,9 +70,8 @@ const ItemCount = ({stock}) => {
                 <button onClick={onRemove}>-</button>
                 <button>+</button>
                 <Link to='/cart'>
-                    <button className='AgregarCarrito' onClick={addToCart}>Comprar {initial} unidades</button>
+                    <button className='AgregarCarrito' onClick={() => agregarAlCarrito(data.id)}>Comprar {initial} unidades</button>
                 </Link>
-                localStorage.setItem("cantidad", {initial});
                 </React.Fragment>
             );
         }
