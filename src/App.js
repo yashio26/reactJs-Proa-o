@@ -4,14 +4,15 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './views/Home/Home';
 import ProductDetail from './views/ProductDetail/ProductDetail';
 import Electronics from './views/Electronics/Electronics';
+import Cart from './views/Cart/Cart';
 import Header from './components/Header/Header';
-import Cart from './views/Cart/Cart'
-import { CartProvider } from './CartContext';
+import ItemCount from './components/ItemCount/ItemCount';
+import { ProductsProvider } from './ProductsContext';
 
 function App() {
   return (
     <Router>
-      <CartProvider>
+      <ProductsProvider>
         <div className="App">
           <Header />
           <NavBar />
@@ -22,7 +23,7 @@ function App() {
             <Route path='/cart' element={<Cart />}/>
           </Routes>
         </div>
-      </CartProvider>
+      </ProductsProvider>
     </Router>
   );
 }

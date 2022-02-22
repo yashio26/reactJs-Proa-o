@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Item from '../Item/Item';
 import './ItemList.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Spinner from '../Spinner/Spinner';
+import { ProductsContext } from '../../ProductsContext';
 
 const ItemList = () => {    
-    const [products, setProducts] = useState([]);
+/*     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -14,26 +15,21 @@ const ItemList = () => {
         setTimeout(() => {
             setIsLoading(false);
         }, 1000);
-        }, []);
+        }, []); */
+
+        const {products} = useContext(ProductsContext);
 
     return (
     <div className="Articulos">
-        {isLoading ? (
-				<Spinner />
-			) : (
-                <>
                     {products.map((product) => {
                         return(
                             <div key={product.id} className='Articulo'>
                                 <Link to={`/item/${product.id}`}>
-                                    <Item data={product}/>
+                                    <Item detail={product}/>
                                 </Link>
                             </div>
                         );
                     })}
-                </>
-            )
-        }
     </div>
     );
 };

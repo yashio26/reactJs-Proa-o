@@ -1,23 +1,31 @@
-import React, {useContext} from 'react'
-import { CartContext } from '../../CartContext'
+import React, {useContext} from 'react';
+import {ProductsContext} from '../../ProductsContext'
+import { Link } from 'react-router-dom';
+import './Cart.css'
 
+const Cart = () => {
 
-const Cart = ({agregarAlCarrito}) => {
+  const {carrito, deleteProduct} = useContext(ProductsContext)
 
-const {carts} = useContext(CartContext);
-console.log (carts)
   return (
-    <div>
-      <h1>hola</h1>
-      {carts.map((cart) => {
+    <div className='Carrito'>
+      {carrito.map((productoCarrito, idx) => {
         return(
-          <div key={cart.id}>
-            <h4>{cart.title}</h4>
-            <p>Cantidad: {} Precio: ${cart.price}</p>
+          <div key={idx} className='ProductoCarrito'>
+            <img src={productoCarrito.image} alt='imagen-producto'/>
+              <h3>Producto: {productoCarrito.title}</h3>
+            <div className='PrecioProducto'>
+              <h4>Precio: ${productoCarrito.cantidad * productoCarrito.price}</h4>
+              <p>Cantidad: {productoCarrito.cantidad} unidades</p>
+              <button onClick={() => deleteProduct(productoCarrito.id)}>Eliminar producto</button>
+            </div>
           </div>
         )
       })}
-      <h1>{carts.title}</h1>
+        {carrito.length === 0 ? 
+        <><h1>¡No hay productos en el carrito!</h1>
+        <Link to='/'><h2>Agregar productos</h2></Link>
+        </> : <button>Terminar mi compra</button>}
     </div>
   )
 }

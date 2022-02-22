@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React/* , { useState } */ from 'react';
 import './ItemCount.css';
 import { Link } from 'react-router-dom';
 
 
-const ItemCount = ({stock, data, agregarAlCarrito}) => {
+const ItemCount = ({stock, initial, onAdd, onRemove, addToCart, detail}) => {
 
-    const [initial, setInitial] = useState(1);
+/*     const [initial, setInitial] = useState(1);
 
     function onAdd() {
         setInitial(initial + 1);
-    }
-    function onRemove(){
+    } */
+/*     function onRemove(){
         setInitial(initial - 1);
-    }
+    } */
 /*     function addToCart(){
         console.log("Se agregaron " + initial + " productos");
     } */
@@ -30,7 +30,7 @@ const ItemCount = ({stock, data, agregarAlCarrito}) => {
                 <p>Queda solo {stock} unidad disponible</p>
                 <p>Comprar: {initial} unidad</p>
                 <Link to='/cart'>
-                    <button className='AgregarCarrito' onClick={() => agregarAlCarrito(data.id)}>Comprar {initial} unidades</button>
+                    <button className='AgregarCarrito' onClick={() => addToCart(detail.id)}>Comprar {initial} unidades</button>
                 </Link>
             </React.Fragment>
         );
@@ -41,10 +41,10 @@ const ItemCount = ({stock, data, agregarAlCarrito}) => {
                 <React.Fragment>
                     <p>Quedan {stock} unidades disponibles</p>
                     <p>Comprar: {initial} unidades</p>
-                    <button onClick={onRemove}>-</button>
-                    <button onClick={onAdd}>+</button>
+                    <button onClick={() => onRemove()}>-</button>
+                    <button onClick={() => onAdd()}>+</button>
                     <Link to='/cart'>
-                    <button className='AgregarCarrito' onClick={() => agregarAlCarrito(data.id)}>Comprar {initial} unidades</button>
+                    <button className='AgregarCarrito' onClick={() => addToCart(detail.id)}>Comprar {initial} unidades</button>
                     </Link>
                 </React.Fragment>
             );
@@ -55,9 +55,9 @@ const ItemCount = ({stock, data, agregarAlCarrito}) => {
                     <p>Quedan {stock} unidades disponibles</p>
                     <p>Comprar: {initial} unidades</p>
                     <button>-</button>
-                    <button onClick={onAdd}>+</button>
+                    <button onClick={() => onAdd()}>+</button>
                     <Link to='/cart'>
-                        <button className='AgregarCarrito' onClick={() => agregarAlCarrito(data.id)}>Comprar {initial} unidades</button>
+                        <button className='AgregarCarrito' onClick={() => addToCart(detail.id)}>Comprar {initial} unidades</button>
                     </Link>
                 </React.Fragment>
             );
@@ -67,10 +67,10 @@ const ItemCount = ({stock, data, agregarAlCarrito}) => {
                 <React.Fragment>
                 <p>Quedan {stock} unidades disponibles</p>
                 <p>Comprar: {initial} unidades</p>
-                <button onClick={onRemove}>-</button>
+                <button onClick={() => onRemove()}>-</button>
                 <button>+</button>
                 <Link to='/cart'>
-                    <button className='AgregarCarrito' onClick={() => agregarAlCarrito(data.id)}>Comprar {initial} unidades</button>
+                    <button className='AgregarCarrito' onClick={() => addToCart(detail.id)}>Comprar {initial} unidades</button>
                 </Link>
                 </React.Fragment>
             );

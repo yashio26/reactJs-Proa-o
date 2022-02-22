@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.css';
 import img from '../../images/logoTienda.png';
-import { Link } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
 	return (
