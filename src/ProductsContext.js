@@ -1,5 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
+/* import axios from 'axios'; */
+import { collection, query, getDocs } from 'firebase/firestore';
+import { db } from './firebase/firebaseConfig';
 
 export const ProductsContext = createContext();
 
@@ -14,11 +16,26 @@ export const ProductsProvider = ({children}) => {
     const [carrito, setCarrito] = useState([]);
     
     useEffect(() => {
-        axios(`${process.env.REACT_APP_BASE_URL}products`).then((res) => setProducts(res.data));
+        const obtenerProductos = async () => {
+            const docs = [];
+            const q = query(collection(db, "tienda"));
+            const querySnapshot = await getDocs(q)
+/*             console.log("Query: ", querySnapshot) */
+            querySnapshot.forEach((doc) => {
+/*                 console.log(doc.data(), "ID:", doc.id) */
+                docs.push({...doc.data(), id: doc.id})
+            })
+            setProducts(docs);
+        };
+        obtenerProductos();
+    }, [])
+
+/*     useEffect(() => {
+        axios(`${process.env.REACT_APP_BASE_URL}products`).then((res) => setProducts(res.data)); */
 /*         setTimeout(() => {
             setIsLoading(false);
         }, 1000); */
-    }, []);
+/*     }, []); */
 
     const onAdd = () => {
         setInitial(initial + 1);
@@ -53,7 +70,7 @@ export const ProductsProvider = ({children}) => {
         setCarrito([...carrito])
     }
     
-    console.log("carrito:", carrito)
+/*     console.log("carrito:", carrito) */
     return(
         <ProductsContext.Provider value={{products, initial, onAdd, onRemove, addToCart, deleteProduct, carrito}}>
             {children}

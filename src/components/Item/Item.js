@@ -12,15 +12,15 @@ export default function Item({ detail }) {
 			<CardMedia
 				component='img'
 				height='400'
-				image={detail.image}
+				image={detail.img}
 				alt='product'
 			/>
 			<CardContent>
 				<Typography gutterBottom variant='h6' component='div'>
-					{detail.title}
+					{detail.producto}
 				</Typography>
 				<Typography variant='body2' color='text.secondary'>
-					Category: {detail.category}
+					Categoria: {detail.categoria}
 				</Typography>
 			</CardContent>
 		</Card>

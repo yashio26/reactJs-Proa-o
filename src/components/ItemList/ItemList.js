@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import Item from '../Item/Item';
 import './ItemList.css';
-import axios from 'axios';
+/* import axios from 'axios'; */
 import { Link } from 'react-router-dom';
-import Spinner from '../Spinner/Spinner';
+/* import Spinner from '../Spinner/Spinner'; */
 import { ProductsContext } from '../../ProductsContext';
 
 const ItemList = () => {    

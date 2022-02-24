@@ -3,7 +3,7 @@ import './ItemCount.css';
 import { Link } from 'react-router-dom';
 
 
-const ItemCount = ({stock, initial, onAdd, onRemove, addToCart, detail}) => {
+const ItemCount = ({initial, onAdd, onRemove, addToCart, detail}) => {
 
 /*     const [initial, setInitial] = useState(1);
 
@@ -17,17 +17,17 @@ const ItemCount = ({stock, initial, onAdd, onRemove, addToCart, detail}) => {
         console.log("Se agregaron " + initial + " productos");
     } */
 
-    if (stock === "0"){
+    if (detail.stock === "0"){
         return (
             <React.Fragment>
             <p>No queda stock disponible!</p>
             </React.Fragment>
         );
     }
-    else if(stock === "1"){
+    else if(detail.stock === "1"){
         return (
             <React.Fragment>
-                <p>Queda solo {stock} unidad disponible</p>
+                <p>Queda solo {detail.stock} unidad disponible</p>
                 <p>Comprar: {initial} unidad</p>
                 <Link to='/cart'>
                     <button className='AgregarCarrito' onClick={() => addToCart(detail.id)}>Comprar {initial} unidades</button>
@@ -36,10 +36,10 @@ const ItemCount = ({stock, initial, onAdd, onRemove, addToCart, detail}) => {
         );
     }
     else {
-        if ((1 < initial) && (stock > initial)){
+        if ((1 < initial) && (detail.stock > initial)){
             return (
                 <React.Fragment>
-                    <p>Quedan {stock} unidades disponibles</p>
+                    <p>Quedan {detail.stock} unidades disponibles</p>
                     <p>Comprar: {initial} unidades</p>
                     <button onClick={() => onRemove()}>-</button>
                     <button onClick={() => onAdd()}>+</button>
@@ -49,10 +49,10 @@ const ItemCount = ({stock, initial, onAdd, onRemove, addToCart, detail}) => {
                 </React.Fragment>
             );
         }
-        else if (stock > initial){
+        else if (detail.stock > initial){
             return (
                 <React.Fragment>
-                    <p>Quedan {stock} unidades disponibles</p>
+                    <p>Quedan {detail.stock} unidades disponibles</p>
                     <p>Comprar: {initial} unidades</p>
                     <button>-</button>
                     <button onClick={() => onAdd()}>+</button>
@@ -65,7 +65,7 @@ const ItemCount = ({stock, initial, onAdd, onRemove, addToCart, detail}) => {
         else{
             return (
                 <React.Fragment>
-                <p>Quedan {stock} unidades disponibles</p>
+                <p>Quedan {detail.stock} unidades disponibles</p>
                 <p>Comprar: {initial} unidades</p>
                 <button onClick={() => onRemove()}>-</button>
                 <button>+</button>

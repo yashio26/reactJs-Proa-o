@@ -12,10 +12,13 @@ const NavBar = () => {
 		<nav className='Navigation'>
 			<ul>
 				<Link to='/' className='Link'>
-					Home
+					Inicio
 				</Link>
-				<Link to='/category' className='Link'>
-					Electronics
+				<Link to='/categoria/personajes' className='Link'>
+					Personajes
+				</Link>
+				<Link to='/categoria/skins' className='Link'>
+					Skins
 				</Link>
 				{carrito.length !== 0 ? 
 				<Link to='/cart' className='Link'>

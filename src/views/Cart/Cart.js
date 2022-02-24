@@ -12,10 +12,10 @@ const Cart = () => {
       {carrito.map((productoCarrito, idx) => {
         return(
           <div key={idx} className='ProductoCarrito'>
-            <img src={productoCarrito.image} alt='imagen-producto'/>
-              <h3>Producto: {productoCarrito.title}</h3>
+            <img src={productoCarrito.img} alt='imagen-producto'/>
+              <h3>Producto: {productoCarrito.producto}</h3>
             <div className='PrecioProducto'>
-              <h4>Precio: ${productoCarrito.cantidad * productoCarrito.price}</h4>
+              <h4>Precio: ${productoCarrito.cantidad * productoCarrito.precio}</h4>
               <p>Cantidad: {productoCarrito.cantidad} unidades</p>
               <button onClick={() => deleteProduct(productoCarrito.id)}>Eliminar producto</button>
             </div>
