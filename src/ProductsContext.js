@@ -62,8 +62,8 @@ export const ProductsProvider = ({children}) => {
                 chequearProducto.cantidad = initial
             }
             else{
-                carrito.push(chequearProducto, chequearProducto.cantidad = initial)
-                console.log("else")
+                carrito.push({...chequearProducto, cantidad: initial})
+                console.log("else", carrito)
             }
         }
 

@@ -1,9 +1,8 @@
 .Navigation {
 	display: flex;
 	background: #000;
-	height: 10vh;
+	height: auto;
 }
-
 ul {
 	display: flex;
 	justify-content: space-around;
@@ -11,9 +10,11 @@ ul {
 	width: 100%;
 	height: 100%;
 }
-
 .Link {
-	color: white;
-	list-style: none;
-	font-size: 20px;
+	color: red;
+	font-size: 3vh;
+	text-decoration: none;
+}
+.Link:hover{
+	color: crimson;
 }

@@ -25,7 +25,10 @@ const Cart = () => {
         {carrito.length === 0 ? 
         <><h1>¡No hay productos en el carrito!</h1>
         <Link to='/'><h2>Agregar productos</h2></Link>
-        </> : <button>Terminar mi compra</button>}
+        </> : 
+        <Link to='/checkout'>
+        <button>Terminar mi compra</button>
+        </Link>}
     </div>
   )
 }

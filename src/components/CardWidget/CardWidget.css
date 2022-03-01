@@ -5,8 +5,8 @@
     color: white;
     flex-direction: row;
     align-items: center;
+    color: rgb(197, 0, 0);
 }
-.LogoCarrito img{
-    height: 100%;
-    width: 80px;
+.LogoCarrito:hover{
+    color: crimson;
 }

@@ -9,7 +9,7 @@ const CardWidget = () => {
 
   return (
     <div className='LogoCarrito'>
-      <img src={LogoCarrito} alt='logo-carrito-compras' className='LogoCarrito'/>
+      <i class="fa-solid fa-cart-shopping"></i>
       <h5>: {initial}</h5>
     </div>
   );
