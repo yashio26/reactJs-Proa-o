@@ -18,8 +18,10 @@ const informacionComprador = {
 const Checkout = () => {
 	const [informacion, setInformacion] = useState(informacionComprador);
 
-    const { carrito } = useContext(ProductsContext)
-
+    const { carrito, setCarrito, pagoFinal } = useContext(ProductsContext)
+	
+/* 	const date = new Date(); */
+	const fecha = `${new Date().getDate()}-${new Date().getMonth()}-${new Date().getFullYear()}, ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
 
 	// Este estado está destinado a guardar el id de la compra
 	const [numeroOrden, setNumeroOrden] = useState('');
@@ -33,16 +35,17 @@ const Checkout = () => {
 		e.preventDefault();
 		console.log(informacion, "carrito: ", carrito);
 		const docRef = await addDoc(collection(db, 'buyer'), {
-			buyer: informacion, items: carrito, date: '', total: '$',
+			buyer: informacion, items: carrito, fecha: fecha, total: `$${pagoFinal}`,
 		});
 		console.log('Document written with ID: ', docRef.id);
 		setNumeroOrden(docRef.id);
 		setInformacion(informacionComprador);
+		setCarrito([]);
 	};
 
 	return (
 		<div>
-			<h1>Checkout</h1>
+			<h1>Ultimo paso:</h1>
 			<form className='FormContainer' onSubmit={onSubmit}>
 				<TextField
 					placeholder='Nombre'
@@ -65,7 +68,7 @@ const Checkout = () => {
 					name='email'
 					onChange={handleOnChange}
 				/>
-				<button className='btnASendAction'>Send</button>
+				<button>Enviar</button>
 			</form>
 			{numeroOrden && 
             <div>

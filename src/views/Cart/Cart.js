@@ -5,7 +5,10 @@ import './Cart.css'
 
 const Cart = () => {
 
-  const {carrito, deleteProduct} = useContext(ProductsContext)
+  const {carrito, setCarrito, deleteProduct, pagoFinal} = useContext(ProductsContext)
+  console.log(carrito);
+
+  
 
   return (
     <div className='Carrito'>
@@ -26,9 +29,16 @@ const Cart = () => {
         <><h1>¡No hay productos en el carrito!</h1>
         <Link to='/'><h2>Agregar productos</h2></Link>
         </> : 
+        <>
+        <Link to='/'>
+          <button>Agregar más productos</button>
+        </Link>
+        <h4>Precio total: {pagoFinal}</h4>
+        <button onClick={() => setCarrito([])}>Vaciar el carrito</button>
         <Link to='/checkout'>
-        <button>Terminar mi compra</button>
-        </Link>}
+          <button>Terminar mi compra</button>
+        </Link>
+        </>}
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useCallback } from 'react';
 /* import axios from 'axios'; */
 import { collection, query, getDocs } from 'firebase/firestore';
 import { db } from './firebase/firebaseConfig';
@@ -14,6 +14,10 @@ export const ProductsProvider = ({children}) => {
     const [initial, setInitial] = useState(1);
     
     const [carrito, setCarrito] = useState([]);
+
+    const [pagoFinal, setPagoFinal] = useState(0);
+
+    const [cantidadItemsCarrito, setCantidadItemsCarrito] = useState(0);
     
     useEffect(() => {
         const obtenerProductos = async () => {
@@ -58,21 +62,64 @@ export const ProductsProvider = ({children}) => {
         )
         if (chequearProducto){
             if(carrito.includes( chequearProducto )){
-                console.log("Esta en el if dentro del if")
-                chequearProducto.cantidad = initial
+                console.log("Esta en el if dentro del if");
+                chequearProducto.cantidad = initial;
             }
             else{
-                carrito.push({...chequearProducto, cantidad: initial})
+                chequearProducto.cantidad = initial
+                carrito.push(chequearProducto)
                 console.log("else", carrito)
             }
         }
 
         setCarrito([...carrito])
     }
+
+    const calculoPagoFinal = useCallback(() =>{
+        const totalPorProducto = [];
+
+        carrito.map((carro) => {
+            const precioTotalProducto = carro.precio * carro.cantidad;
+            return totalPorProducto.push(precioTotalProducto)
+        })
+
+        let precioCarrito = 0;
+
+        for (let i=0; i<totalPorProducto.length; i++){
+            precioCarrito = precioCarrito + parseInt(totalPorProducto[i]);
+        }
+        console.log('precio Carrito: ',precioCarrito)
+        setPagoFinal(precioCarrito);
+    }, [carrito])
+
+    useEffect(() => {
+        calculoPagoFinal();
+    }, [calculoPagoFinal]);
+
+    const cantidadCarrito = useCallback(() =>{
+        const cantidadPorProducto = [];
+
+        carrito.map((carro) => {
+            const cantidadTotalProducto = carro.cantidad;
+            return cantidadPorProducto.push(cantidadTotalProducto)
+        })
+
+        let cantidadTotalCarrito = 0;
+
+        for (let i=0; i<cantidadPorProducto.length; i++){
+            cantidadTotalCarrito = cantidadTotalCarrito + parseInt(cantidadPorProducto[i]);
+        }
+        console.log('cantidad de items en carrito: ',cantidadTotalCarrito)
+        setCantidadItemsCarrito(cantidadTotalCarrito);
+    }, [carrito])
+
+    useEffect(() => {
+        cantidadCarrito();
+    }, [cantidadCarrito]);
     
 /*     console.log("carrito:", carrito) */
     return(
-        <ProductsContext.Provider value={{products, initial, onAdd, onRemove, addToCart, deleteProduct, carrito}}>
+        <ProductsContext.Provider value={{products, initial, onAdd, onRemove, addToCart, deleteProduct, carrito, setCarrito, pagoFinal, cantidadItemsCarrito}}>
             {children}
         </ProductsContext.Provider>
     )
