@@ -1,18 +1,20 @@
 import React, { useState, useContext } from 'react';
 import { ProductsContext } from '../../ProductsContext';
+import './Checkout.css'
 
 // Firebase
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, updateDoc, doc } from 'firebase/firestore';
 import { db } from '../../firebase/firebaseConfig';
 
 /* import MessageSuccess from '../../components/MessageSuccess/MessageSuccess'; */
 
-import TextField from '@mui/material/TextField';
+import { Link } from 'react-router-dom';
 
 const informacionComprador = {
 	name: '',
 	phone: '',
 	email: '',
+	plataforma: '',
 };
 
 const Checkout = () => {
@@ -21,7 +23,7 @@ const Checkout = () => {
     const { carrito, setCarrito, pagoFinal } = useContext(ProductsContext)
 	
 /* 	const date = new Date(); */
-	const fecha = `${new Date().getDate()}-${new Date().getMonth()}-${new Date().getFullYear()}, ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
+	const fecha = `${new Date().getDate()}-${new Date().getMonth() + 1}-${new Date().getFullYear()}, ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
 
 	// Este estado está destinado a guardar el id de la compra
 	const [numeroOrden, setNumeroOrden] = useState('');
@@ -30,52 +32,85 @@ const Checkout = () => {
 		const { value, name } = e.target;
 		setInformacion({ ...informacion, [name]: value });
 	};
-
+	console.log(informacion)
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		console.log(informacion, "carrito: ", carrito);
 		const docRef = await addDoc(collection(db, 'buyer'), {
 			buyer: informacion, items: carrito, fecha: fecha, total: `$${pagoFinal}`,
 		});
+		carrito.forEach((carro) => {
+			const nuevoStock = carro.stock - carro.cantidad;
+			const stockRef = doc(db, 'tienda', carro.id);
+			updateDoc(stockRef, {
+				stock: nuevoStock
+			})
+		})
 		console.log('Document written with ID: ', docRef.id);
 		setNumeroOrden(docRef.id);
 		setInformacion(informacionComprador);
 		setCarrito([]);
+		localStorage.setItem('carrito', JSON.stringify([]));
 	};
 
 	return (
-		<div>
-			<h1>Ultimo paso:</h1>
-			<form className='FormContainer' onSubmit={onSubmit}>
-				<TextField
-					placeholder='Nombre'
-					style={{ margin: 10, width: 400 }}
-					value={informacion.name}
-					name='name'
-					onChange={handleOnChange}
-				/>
-				<TextField
-					placeholder='Telefono'
-					style={{ margin: 10, width: 400 }}
-					value={informacion.phone}
-					name='phone'
-					onChange={handleOnChange}
-				/>
-				<TextField
-					placeholder='Email'
-					style={{ margin: 10, width: 400 }}
-					value={informacion.email}
-					name='email'
-					onChange={handleOnChange}
-				/>
+		<>
+		<h1 className='Titulo'>Reserva</h1>
+		<div className='DatosDeCompra'>
+			{numeroOrden ? 
+            <>
+                <h2>¡Su reserva fue realizada con éxito!</h2>
+                <p>Su número de orden es: {numeroOrden}. Todos los datos fueron enviados por correo.</p>
+				<img src='https://firebasestorage.googleapis.com/v0/b/dbd-latino.appspot.com/o/dbd-game.gif?alt=media&token=af15ede5-92da-4dd6-815a-bba017f095b0' alt='Logo-Dead-By-Daylight'/>
+				<Link className='Link' to={'/'}>
+					<h2>Volver al inicio</h2>
+				</Link>
+            </> :
+			<>
+			<form onSubmit={onSubmit}>
+				<div style={{display: 'flex'}}>
+					<label>Nombre</label>
+					<input
+						required
+						type='text'
+						placeholder='Nombre'
+						value={informacion.name}
+						name='name'
+						onChange={handleOnChange}
+					/>
+					<label>N° de celular</label>
+					<input
+						required
+						type='number'
+						placeholder='Telefono'
+						value={informacion.phone}
+						name='phone'
+						onChange={handleOnChange}
+					/>
+				</div>
+				<div style={{display: 'flex'}}>
+					<label>Email</label>
+					<input
+						required
+						type='email'
+						placeholder='Email'
+						value={informacion.email}
+						name='email'
+						onChange={handleOnChange}
+					/>
+					<label>Plataforma</label>
+					<select required value={informacion.plataforma} name='plataforma' onChange={handleOnChange}>
+						<option value='' disabled>Seleccione una plataforma...</option>
+						<option value='Steam'>Steam</option>
+						<option value='PlayStation'>PlayStation 4</option>
+						<option value='Xbox'>Xbox One</option>
+					</select>
+				</div>
 				<button>Enviar</button>
 			</form>
-			{numeroOrden && 
-            <div>
-                <h2>¡Su compra fue realizada con éxito!</h2>
-                <p>Su número de orden es: {numeroOrden}. Todos los datos fueron enviados por correo.</p>
-            </div>}
+			</>}
 		</div>
+		</>
 	);
 };
 

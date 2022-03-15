@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 
 export default function Item({ detail }) {
 	return (
-		<Card sx={{ minHeight: 400, maxWidth: 345, backgroundColor: 'rgba(41, 41, 41, 0.808)' }}>
+		<Card sx={{ minHeight: 400, maxWidth: 345, backgroundColor: 'rgba(41, 41, 41, 0.608)' }}>
 			<CardMedia
 				component='img'
 				height='400'

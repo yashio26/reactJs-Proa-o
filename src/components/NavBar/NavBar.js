@@ -20,8 +20,14 @@ const NavBar = () => {
 				<Link to='/categoria/skins' className='Link'>
 					Skins
 				</Link>
+				<Link to='/categoria/celulas' className='Link'>
+					Celulas
+				</Link>
+				<Link to={'/sobre-nosotros'} className='Link'>
+					Sobre nosotros
+				</Link>
 				{carrito.length !== 0 ? 
-				<Link to='/cart' className='Link'>
+				<Link to='/carrito' className='Link'>
 					<CardWidget />
 				</Link> : null}
 			</ul>

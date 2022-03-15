@@ -9,11 +9,11 @@ export const ProductsContext = createContext();
 export const ProductsProvider = ({children}) => {
     
     const [products, setProducts] = useState([]);
-/*     const [isLoading, setIsLoading] = useState(true); */
+    const [isLoading, setIsLoading] = useState(true);
 
     const [initial, setInitial] = useState(1);
     
-    const [carrito, setCarrito] = useState([]);
+    let [carrito, setCarrito] = useState([]);
 
     const [pagoFinal, setPagoFinal] = useState(0);
 
@@ -32,6 +32,12 @@ export const ProductsProvider = ({children}) => {
             setProducts(docs);
         };
         obtenerProductos();
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 500)
+        if(localStorage.getItem('carrito')){
+            setCarrito(JSON.parse(localStorage.getItem('carrito')))
+        }
     }, [])
 
 /*     useEffect(() => {
@@ -54,6 +60,12 @@ export const ProductsProvider = ({children}) => {
             carro.id !== carritoId
         )
         setCarrito(eliminar)
+        localStorage.setItem('carrito', JSON.stringify(eliminar));
+    }
+
+    const removeProducts = () => {
+        setCarrito([]);
+        localStorage.setItem('carrito', JSON.stringify([]));
     }
 
     const addToCart = (productId) => {
@@ -71,8 +83,9 @@ export const ProductsProvider = ({children}) => {
                 console.log("else", carrito)
             }
         }
-
+        setInitial(1)
         setCarrito([...carrito])
+        localStorage.setItem('carrito', JSON.stringify(carrito));
     }
 
     const calculoPagoFinal = useCallback(() =>{
@@ -116,10 +129,15 @@ export const ProductsProvider = ({children}) => {
     useEffect(() => {
         cantidadCarrito();
     }, [cantidadCarrito]);
+
+/*     if(localStorage.getItem('carrito')){
+        setCarrito = JSON.parse(localStorage.getItem('carrito'))
+        console.log('carrito traido de local storage: ', carrito)
+    } */
     
 /*     console.log("carrito:", carrito) */
     return(
-        <ProductsContext.Provider value={{products, initial, onAdd, onRemove, addToCart, deleteProduct, carrito, setCarrito, pagoFinal, cantidadItemsCarrito}}>
+        <ProductsContext.Provider value={{products, initial, onAdd, onRemove, addToCart, deleteProduct, carrito, setCarrito, pagoFinal, cantidadItemsCarrito, isLoading, removeProducts}}>
             {children}
         </ProductsContext.Provider>
     )

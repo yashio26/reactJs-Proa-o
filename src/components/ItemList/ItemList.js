@@ -5,6 +5,7 @@ import './ItemList.css';
 import { Link } from 'react-router-dom';
 /* import Spinner from '../Spinner/Spinner'; */
 import { ProductsContext } from '../../ProductsContext';
+import Spinner from '../Spinner/Spinner';
 
 const ItemList = () => {    
 /*     const [products, setProducts] = useState([]);
@@ -17,19 +18,24 @@ const ItemList = () => {
         }, 1000);
         }, []); */
 
-        const {products} = useContext(ProductsContext);
+        const {products, isLoading} = useContext(ProductsContext);
 
     return (
     <div className="Articulos">
-                    {products.map((product) => {
-                        return(
-                            <div key={product.id} className='Articulo'>
-                                <Link to={`/item/${product.id}`}>
-                                    <Item detail={product}/>
-                                </Link>
-                            </div>
-                        );
-                    })}
+        {isLoading ?
+        <Spinner /> :
+        <>
+        {products.map((product) => {
+            return(
+                <div key={product.id} className='Articulo'>
+                    <Link to={`/item/${product.id}`} style={{textDecoration: 'none'}}>
+                        <Item detail={product}/>
+                    </Link>
+                </div>
+            );
+        })}
+        </>
+        }
     </div>
     );
 };

@@ -8,6 +8,7 @@ import Cart from './views/Cart/Cart';
 import Header from './components/Header/Header';
 import Checkout from './views/Checkout/Checkout';
 import { ProductsProvider } from './ProductsContext';
+import About from './views/About/About';
 
 function App() {
   return (
@@ -20,8 +21,9 @@ function App() {
             <Route path="/" element={<Home />}/>
             <Route path='/categoria/:categoria' element={<Category />}/>
             <Route path='/item/:id' element={<ProductDetail />}/>
-            <Route path='/cart' element={<Cart />}/>
+            <Route path='/carrito' element={<Cart />}/>
             <Route path='/checkout' element={<Checkout />}/>
+            <Route path='/sobre-nosotros' element={<About />}/>
           </Routes>
         </div>
       </ProductsProvider>

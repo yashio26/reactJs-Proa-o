@@ -17,62 +17,64 @@ const ItemCount = ({initial, onAdd, onRemove, addToCart, detail}) => {
         console.log("Se agregaron " + initial + " productos");
     } */
 
-    if (detail.stock === "0"){
+    if (detail.stock === 0){
         return (
-            <React.Fragment>
+            <div className='Stock'>
             <p>No queda stock disponible!</p>
-            </React.Fragment>
+            </div>
         );
     }
-    else if(detail.stock === "1"){
+    else if(detail.stock === 1){
         return (
-            <React.Fragment>
-                <p>Queda solo {detail.stock} unidad disponible</p>
-                <p>Comprar: {initial} unidad</p>
-                <Link to='/cart'>
-                    <button className='AgregarCarrito' onClick={() => addToCart(detail.id)}>Comprar {initial} unidades</button>
+            <div className='Stock'>
+                <p>¡Queda solo {detail.stock} unidad disponible!</p>
+                <Link to='/carrito'>
+                    <button className='BotonAgregarCarrito' onClick={() => addToCart(detail.id)}>Comprar {initial} unidad</button>
                 </Link>
-            </React.Fragment>
+            </div>
         );
     }
     else {
         if ((1 < initial) && (detail.stock > initial)){
             return (
-                <React.Fragment>
+                <div className='Stock'>
                     <p>Quedan {detail.stock} unidades disponibles</p>
-                    <p>Comprar: {initial} unidades</p>
-                    <button onClick={() => onRemove()}>-</button>
-                    <button onClick={() => onAdd()}>+</button>
-                    <Link to='/cart'>
-                    <button className='AgregarCarrito' onClick={() => addToCart(detail.id)}>Comprar {initial} unidades</button>
-                    </Link>
-                </React.Fragment>
+                    <div className='CantidadAComprar'>
+                        <button onClick={() => onRemove()}>-</button>
+                        <Link to='/carrito'>
+                            <button className='BotonAgregarCarrito' onClick={() => addToCart(detail.id)}>Comprar {initial} unidades</button>
+                        </Link>
+                        <button onClick={() => onAdd()}>+</button>
+                    </div>
+                </div>
             );
         }
         else if (detail.stock > initial){
             return (
-                <React.Fragment>
+                <div className='Stock'>
                     <p>Quedan {detail.stock} unidades disponibles</p>
-                    <p>Comprar: {initial} unidades</p>
-                    <button>-</button>
-                    <button onClick={() => onAdd()}>+</button>
-                    <Link to='/cart'>
-                        <button className='AgregarCarrito' onClick={() => addToCart(detail.id)}>Comprar {initial} unidades</button>
-                    </Link>
-                </React.Fragment>
+                    <div className='CantidadAComprar'>
+                        <button>-</button>
+                        <Link to='/carrito'>
+                            <button className='BotonAgregarCarrito' onClick={() => addToCart(detail.id)}>Comprar {initial} unidades</button>
+                        </Link>
+                        <button onClick={() => onAdd()}>+</button>
+                    </div>
+                </div>
             );
         }
         else{
             return (
-                <React.Fragment>
+                <div className='Stock'>
                 <p>Quedan {detail.stock} unidades disponibles</p>
-                <p>Comprar: {initial} unidades</p>
-                <button onClick={() => onRemove()}>-</button>
-                <button>+</button>
-                <Link to='/cart'>
-                    <button className='AgregarCarrito' onClick={() => addToCart(detail.id)}>Comprar {initial} unidades</button>
-                </Link>
-                </React.Fragment>
+                <div className='CantidadAComprar'>
+                    <button onClick={() => onRemove()}>-</button>
+                    <Link to='/carrito'>
+                        <button className='BotonAgregarCarrito' onClick={() => addToCart(detail.id)}>Comprar {initial} unidades</button>
+                    </Link>
+                    <button>+</button>
+                </div>
+                </div>
             );
         }
     }

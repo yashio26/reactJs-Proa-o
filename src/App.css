@@ -3,4 +3,12 @@
   background: linear-gradient(to bottom,rgb(48, 48, 48),rgb(35,0,0));
   min-height: 100vh;
   color: skyblue;
+  display: flex;
+  flex-direction: column;
+}
+.Titulo{
+  font-family: cursive;
+}
+p{
+  font-size: 18px;
 }

@@ -4,7 +4,7 @@ import ItemListContainer from '../../components/ItemListContainer/ItemListContai
 const Home = () => {
   return(
     <>
-      <h1>Lo destacado de la semana</h1>
+      <h1 className='Titulo'>Productos</h1>
       <ItemListContainer />
     </>
       
