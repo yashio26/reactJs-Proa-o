@@ -1,14 +1,13 @@
 import React, {useContext} from 'react';
-import {ProductsContext} from '../../ProductsContext'
+import './Cart.css';
+//Context
+import {ProductsContext} from '../../ProductsContext';
+//React-Router-Dom
 import { Link } from 'react-router-dom';
-import './Cart.css'
 
 const Cart = () => {
 
-  const {carrito, deleteProduct, pagoFinal, removeProducts} = useContext(ProductsContext)
-  console.log(carrito);
-
-  
+  const {carrito, deleteProduct, pagoFinal, removeProducts} = useContext(ProductsContext);
 
   return (
     <div className='Carrito'>
@@ -28,9 +27,11 @@ const Cart = () => {
       })}
         {carrito.length === 0 ? 
         <>
-        <h2>¡No hay productos en el carrito!</h2>
-        <img src='https://firebasestorage.googleapis.com/v0/b/dbd-latino.appspot.com/o/dbd-game.gif?alt=media&token=af15ede5-92da-4dd6-815a-bba017f095b0' alt='Logo-Dead-By-Daylight'/>
-        <Link to='/' className='Link'><h2>Agregar productos</h2></Link>
+          <h2>¡No hay productos en el carrito!</h2>
+          <img src='https://firebasestorage.googleapis.com/v0/b/dbd-latino.appspot.com/o/dbd-game.gif?alt=media&token=af15ede5-92da-4dd6-815a-bba017f095b0' alt='Logo-Dead-By-Daylight'/>
+          <Link to='/' className='Link'>
+            <h2>Agregar productos</h2>
+          </Link>
         </> : 
         <div className='BotonesGestionCarrito'>
           <Link to='/'>
@@ -48,4 +49,4 @@ const Cart = () => {
   )
 }
 
-export default Cart
+export default Cart;

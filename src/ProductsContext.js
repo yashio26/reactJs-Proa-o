@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect, useCallback } from 'react';
-/* import axios from 'axios'; */
 import { collection, query, getDocs } from 'firebase/firestore';
 import { db } from './firebase/firebaseConfig';
 
@@ -24,9 +23,7 @@ export const ProductsProvider = ({children}) => {
             const docs = [];
             const q = query(collection(db, "tienda"));
             const querySnapshot = await getDocs(q)
-/*             console.log("Query: ", querySnapshot) */
             querySnapshot.forEach((doc) => {
-/*                 console.log(doc.data(), "ID:", doc.id) */
                 docs.push({...doc.data(), id: doc.id})
             })
             setProducts(docs);
@@ -39,13 +36,6 @@ export const ProductsProvider = ({children}) => {
             setCarrito(JSON.parse(localStorage.getItem('carrito')))
         }
     }, [])
-
-/*     useEffect(() => {
-        axios(`${process.env.REACT_APP_BASE_URL}products`).then((res) => setProducts(res.data)); */
-/*         setTimeout(() => {
-            setIsLoading(false);
-        }, 1000); */
-/*     }, []); */
 
     const onAdd = () => {
         setInitial(initial + 1);
@@ -74,13 +64,11 @@ export const ProductsProvider = ({children}) => {
         )
         if (chequearProducto){
             if(carrito.includes( chequearProducto )){
-                console.log("Esta en el if dentro del if");
                 chequearProducto.cantidad = initial;
             }
             else{
                 chequearProducto.cantidad = initial
                 carrito.push(chequearProducto)
-                console.log("else", carrito)
             }
         }
         setInitial(1)
@@ -101,7 +89,6 @@ export const ProductsProvider = ({children}) => {
         for (let i=0; i<totalPorProducto.length; i++){
             precioCarrito = precioCarrito + parseInt(totalPorProducto[i]);
         }
-        console.log('precio Carrito: ',precioCarrito)
         setPagoFinal(precioCarrito);
     }, [carrito])
 
@@ -122,7 +109,6 @@ export const ProductsProvider = ({children}) => {
         for (let i=0; i<cantidadPorProducto.length; i++){
             cantidadTotalCarrito = cantidadTotalCarrito + parseInt(cantidadPorProducto[i]);
         }
-        console.log('cantidad de items en carrito: ',cantidadTotalCarrito)
         setCantidadItemsCarrito(cantidadTotalCarrito);
     }, [carrito])
 
@@ -130,12 +116,6 @@ export const ProductsProvider = ({children}) => {
         cantidadCarrito();
     }, [cantidadCarrito]);
 
-/*     if(localStorage.getItem('carrito')){
-        setCarrito = JSON.parse(localStorage.getItem('carrito'))
-        console.log('carrito traido de local storage: ', carrito)
-    } */
-    
-/*     console.log("carrito:", carrito) */
     return(
         <ProductsContext.Provider value={{products, initial, onAdd, onRemove, addToCart, deleteProduct, carrito, setCarrito, pagoFinal, cantidadItemsCarrito, isLoading, removeProducts}}>
             {children}

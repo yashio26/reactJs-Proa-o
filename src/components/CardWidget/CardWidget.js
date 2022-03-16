@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
 import './CardWidget.css';
+//Context
 import { ProductsContext } from '../../ProductsContext';
 
 const CardWidget = () => {

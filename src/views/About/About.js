@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
 import './About.css';
-
+//Firebase
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../../firebase/firebaseConfig';
-
-
 
 const formularioDeContacto = {
 	name: '',
@@ -22,14 +20,11 @@ const About = () => {
 		const { value, name } = e.target;
 		setDatosContacto({ ...datosContacto, [name]: value });
 	};
-	console.log(datosContacto)
 	const onSubmit = async (e) => {
 		e.preventDefault();
-		console.log(datosContacto);
 		const docRef = await addDoc(collection(db, 'contacto'), {
 			contacto: datosContacto,
 		});
-        console.log('Document written with ID: ', docRef.id);
         setContacto(docRef)
 		setDatosContacto(formularioDeContacto);
 	};
@@ -44,7 +39,7 @@ const About = () => {
                 Los supervivientes juegan en tercera persona y tienen la ventaja de contar con una mejor percepción del entorno. El asesino juega 
                 en primera persona y está más enfocado en su presa. El objetivo del superviviente en cada encuentro es escapar del área de matanza 
                 sin que lo capture el asesino, algo que suena más fácil de lo que es, especialmente con un entorno que cambia cada vez que juegas.</p>
-            <h3>Formulario de contacto</h3>
+            <h2>Contacto</h2>
             <div className='FormularioDeContacto'>
                 {contacto ?
                 <>
@@ -83,40 +78,8 @@ const About = () => {
                         <button>Enviar</button>
                 </form>}
             </div>
-{/*             <form onSubmit={onSubmit}>
-    			<label>Nombre</label>
-    			<input
-    				required
-    				type='text'
-    				placeholder='Nombre'
-    				value={datosContacto.name}
-    				name='name'
-    				onChange={handleOnChange}
-    			/>
-    			<label>Email</label>
-    			<input
-    				required
-    				type='email'
-    				placeholder='Email'
-    				value={datosContacto.email}
-    				name='email'
-    				onChange={handleOnChange}
-    			/>
-                <div>
-                    <label>¿Que quieres consultar?</label>
-                    <textarea
-                        required
-                        type='number'
-                        placeholder='Descripcion'
-                        value={datosContacto.description}
-                        name='description'
-                        onChange={handleOnChange}
-                    />
-                </div>
-    				<button>Enviar</button>
-    			</form> */}
         </div>
     )
 }
 
-export default About
+export default About;

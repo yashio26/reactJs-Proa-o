@@ -1,0 +1,8 @@
+.Error404 img{
+    width: 600px;
+    height: 400px;
+    margin: 20px;
+}
+.Error404 .Link{
+    text-decoration: underline;
+}

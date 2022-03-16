@@ -1,21 +1,10 @@
-import React/* , { useState } */ from 'react';
+import React from 'react';
 import './ItemCount.css';
+//React-Router-Dom
 import { Link } from 'react-router-dom';
 
 
 const ItemCount = ({initial, onAdd, onRemove, addToCart, detail}) => {
-
-/*     const [initial, setInitial] = useState(1);
-
-    function onAdd() {
-        setInitial(initial + 1);
-    } */
-/*     function onRemove(){
-        setInitial(initial - 1);
-    } */
-/*     function addToCart(){
-        console.log("Se agregaron " + initial + " productos");
-    } */
 
     if (detail.stock === 0){
         return (

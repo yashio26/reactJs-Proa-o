@@ -1,7 +1,9 @@
 import React, {useContext} from 'react';
-import CardWidget from '../CardWidget/CardWidget';
 import './NavBar.css';
+import CardWidget from '../CardWidget/CardWidget';
+//React-Router-Dom
 import { Link } from 'react-router-dom';
+//Context
 import { ProductsContext } from '../../ProductsContext';
 
 const NavBar = () => {

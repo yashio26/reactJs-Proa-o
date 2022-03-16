@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
 import ItemCount from '../ItemCount/ItemCount';
+//Context
 import { ProductsContext } from '../../ProductsContext';
 
 const ItemDetail = ({detail}) => {

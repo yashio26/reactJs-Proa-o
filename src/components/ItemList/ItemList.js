@@ -1,24 +1,15 @@
 import React, { useContext } from 'react';
-import Item from '../Item/Item';
 import './ItemList.css';
-/* import axios from 'axios'; */
-import { Link } from 'react-router-dom';
-/* import Spinner from '../Spinner/Spinner'; */
-import { ProductsContext } from '../../ProductsContext';
+import Item from '../Item/Item';
 import Spinner from '../Spinner/Spinner';
+//React-Router-Dom
+import { Link } from 'react-router-dom';
+//Context
+import { ProductsContext } from '../../ProductsContext';
 
 const ItemList = () => {    
-/*     const [products, setProducts] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        axios(`${process.env.REACT_APP_BASE_URL}products`).then((res) => setProducts(res.data));
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 1000);
-        }, []); */
-
-        const {products, isLoading} = useContext(ProductsContext);
+    const {products, isLoading} = useContext(ProductsContext);
 
     return (
     <div className="Articulos">

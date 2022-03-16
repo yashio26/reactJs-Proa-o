@@ -1,19 +1,21 @@
 import React, { useState, useEffect} from 'react';
-import Item from '../Item/Item';
 import './ItemListContainerCategory.css';
-import { Link } from 'react-router-dom';
+import Item from '../Item/Item';
 import Spinner from '../Spinner/Spinner';
+//React-Router-Dom
+import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+//Firebase
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase/firebaseConfig';
 
-const ItemListContainerCategory = () => {    
+const ItemListContainerCategory = () => { 
+
     const [seleccionCategoria, setSeleccionCategoria] = useState([]);
+    
     const [isLoading, setIsLoading] = useState(true);
 
     const { categoria } = useParams();
-    console.log(seleccionCategoria);
-    console.log(categoria)
 
     const capitalize = (palabra) => {
         return palabra[0].toUpperCase() + palabra.slice(1);
@@ -31,7 +33,6 @@ const ItemListContainerCategory = () => {
             setSeleccionCategoria(docs);
         };
         obtenerCategoria();
-        console.log(obtenerCategoria);
         setTimeout(() => {
             setIsLoading(false)
         }, 500)
